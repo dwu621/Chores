@@ -19,8 +19,52 @@ const findAllUsers = async (req, res) => {
     }
 }
 
+const createChore = async (req, res) => {
+    try {
+        const chore = await new Chore(req.body)
+        await chore.save()
+        return res.status(201).json({ chore })
+    } catch (err) {
+        return res.status(500).json({ error: err.message })
+    }
+}
+
+const findAllChores = async (req, res) => {
+    try {
+        const chores = await Chore.find()
+        return res.status(200).json({ chores })
+    } catch (err) {
+        return res.status(500).send(err.message)
+    }
+}
+
+const createReward = async (req, res) => {
+    try {
+        const reward = await new Reward(req.body)
+        await reward.save()
+        return res.status(201).json({ reward })
+    } catch (err) {
+        return res.status(500).json({ error: err.message })
+    }
+}
+
+const findAllRewards = async (req, res) => {
+    try {
+        const rewards = await Reward.find()
+        return res.status(200).json({ rewards })
+    } catch (err) {
+        return res.status(500).send(err.message)
+    }
+}
+
+
+
 
 module.exports = {
     createUser,
-    findAllUsers
+    findAllUsers,
+    createChore,
+    findAllChores,
+    createReward,
+    findAllRewards
 }
