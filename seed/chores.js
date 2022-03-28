@@ -35,7 +35,18 @@ const main = async () => {
             pointsWorth: '10',
             isComplete: false
         },
-        
+        {
+            name: 'Mow Lawn',
+            description: 'Mow the lawn',
+            pointsWorth: '50',
+            isComplete: false
+        },
+        {
+            name: 'Walk Dog',
+            description: 'Walk the dog',
+            pointsWorth: '10',
+            isComplete: false
+        },
     ]
     
     await Chore.insertMany(chores)
