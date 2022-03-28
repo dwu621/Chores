@@ -1,4 +1,4 @@
-import express from "express"
+const express = require("express")
 const db = require('./db')
 const routes = require('./routes')
 const cors = require('cors')
