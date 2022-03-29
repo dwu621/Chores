@@ -1,4 +1,4 @@
-const res = require('express/lib/response')
+const express = require('express')
 const { User, Chore, Reward } = require('../models')
 
 const createUser = async (req, res) => {
