@@ -10,7 +10,7 @@ const createUser = async (req, res) => {
     }
 }
 
-const findAllUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
     try {
         const users = await User.find()
         return res.status(200).json({ users })
@@ -18,6 +18,19 @@ const findAllUsers = async (req, res) => {
         return res.status(500).send(err.message)
     }
 }
+
+const getUserById = async (req, res) => {
+    try {
+        const { id } = req.params
+        const user = await User.findById(id)
+        if (user) {
+            return res.status(200).json({ user })
+        }
+        return res.status(400).send('User with the specified id does not exist!')
+    } catch (err) {
+        return res.status(500).send(err.message)
+    }
+} 
 
 const createChore = async (req, res) => {
     try {
@@ -62,7 +75,8 @@ const findAllRewards = async (req, res) => {
 
 module.exports = {
     createUser,
-    findAllUsers,
+    getAllUsers,
+    getUserById,
     createChore,
     findAllChores,
     createReward,
