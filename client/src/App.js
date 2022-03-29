@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { DataContext } from './components/DataContext';
 import './App.css'
 import ComponentA from './components/ComponentA';

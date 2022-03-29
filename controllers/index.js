@@ -1,3 +1,4 @@
+const res = require('express/lib/response')
 const { User, Chore, Reward } = require('../models')
 
 const createUser = async (req, res) => {
@@ -26,11 +27,38 @@ const getUserById = async (req, res) => {
         if (user) {
             return res.status(200).json({ user })
         }
-        return res.status(400).send('User with the specified id does not exist!')
+        return res.status(400).send('User with the specified id does not exist.')
     } catch (err) {
         return res.status(500).send(err.message)
     }
 } 
+
+const updateUser = async (req, res) => {
+    try {
+        const { id } = req.params
+        const user = await User.findByIdAndUpdate(id, req.body, { new: true})
+            if (!user) {
+                res.status(500).send('User not found')
+            }
+            return res.status(200).json(user)
+    } catch (err) {
+        return res.status(500).send(err.message)
+    }
+}
+
+const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params
+        const deleted = await User.findByIdAndDelete(id)
+        if (deleted) {
+            return res.status(200).send('User deleted')
+        }
+        throw new Error('User not found!')
+    }
+    catch (err) {
+        return res.status(500).send(err.message)
+    }
+}
 
 const createChore = async (req, res) => {
     try {
@@ -77,6 +105,8 @@ module.exports = {
     createUser,
     getAllUsers,
     getUserById,
+    updateUser,
+    deleteUser,
     createChore,
     findAllChores,
     createReward,
