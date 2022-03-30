@@ -8,6 +8,7 @@ const Header = () => {
     return (
         <header>
            <nav>
+            {isLoggedIn && <Link to='/'>{currentUser.userName}</Link>}
            <Link to='/'>Home</Link>
            <Link to='about'>About</Link>
            {(!isLoggedIn) ? (<Link to='login'>Login</Link>) : (<Link to='logout'>Logout</Link>) }

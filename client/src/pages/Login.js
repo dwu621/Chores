@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { DataContext } from '../components/DataContext'
-import { useNavigate } from 'react-router-dom'
 
 
 // input form to collect data
@@ -10,11 +9,8 @@ import { useNavigate } from 'react-router-dom'
 // set isParent to user.isParent
 // navigate back home
 
-
-
 const Login = () => {
-    const navigate = useNavigate()
-    const { isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, isParent, setIsParent, allUsers } = useContext( DataContext )
+    const { isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, setIsParent, allUsers, navigate } = useContext( DataContext )
     const [checkUser, setCheckUser] = useState({
         userName: '',
         password: ''
@@ -41,7 +37,6 @@ const Login = () => {
         } else {console.log('Invalid username or password')}
        
     }
-    
     
     return (
         <div>
