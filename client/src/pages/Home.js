@@ -27,8 +27,8 @@ const Home = () => {
                         choresList={child.choresList}
                         onClick={() => showChild(child._id)}
                         />
-                        ))
-                        }  
+                    ))
+                    }  
                     </section>
                 </div>
             </div>

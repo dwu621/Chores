@@ -22,6 +22,7 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({})
   const [isParent, setIsParent] = useState(false)
   const [children, setChildren] = useState([])
+  const [thisChild, setThisChild] = useState({})
   
   const navigate = useNavigate()
   
@@ -75,7 +76,24 @@ const App = () => {
   
   return (
     <div className="App">
-       <DataContext.Provider value={{ userInfo, setUserInfo, chore, setChore, isLoggedIn, setIsLoggedIn, allUsers, currentUser, setCurrentUser, isParent, setIsParent, navigate, children, showChild}}> 
+       <DataContext.Provider value={{ 
+        userInfo, 
+        setUserInfo, 
+        chore, 
+        setChore, 
+        isLoggedIn, 
+        setIsLoggedIn, 
+        allUsers, 
+        currentUser, 
+        setCurrentUser, 
+        isParent, 
+        setIsParent,
+        navigate, 
+        children, 
+        showChild, 
+        thisChild, 
+        setThisChild
+       }}> 
           <Header/>
             <Routes>
               <Route path='/' element={ <Home />} />
