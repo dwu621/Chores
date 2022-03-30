@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { DataContext } from './DataContext';
 
 const Header = () => {
-    const { isLoggedIn,   } = useContext(DataContext)
+    const { isLoggedIn, currentUser  } = useContext(DataContext)
     
     return (
         <header>
