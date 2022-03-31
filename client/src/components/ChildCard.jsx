@@ -10,7 +10,7 @@ const ChildCard = (props) => {
                 <ul>
                     {props.choresList.map((chore, index) => (
                         <li key={index}>
-                            {chore} 
+                            {chore.name} 
                         </li>
                     ))}
                 </ul>

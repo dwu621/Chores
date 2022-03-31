@@ -39,16 +39,13 @@ const ChildDetails = () => {
     useEffect(() => {
         getChild()
     }, [newList])
-    
-    
-    const addChore = async (choreName) => {
-        setNewList({choresList: [...thisChildList, choreName]})
-        if (newList !== thisChildList){
-            await axios.put(`${BASE_URL}/user/${id}`, newList)
-        }
-        console.log(thisChildList)
-        console.log(choreName)
-        console.log('new', newList)
+
+   
+    const addChore = async (chore) => {
+        thisChild.choresList.push(chore)
+        await axios.put(`${BASE_URL}/user/${id}`, thisChild)
+        getChild()
+        
     }
     return (
         <div>
@@ -71,7 +68,8 @@ const ChildDetails = () => {
                         description={chore.description}
                         pointsWorth={chore.pointsWorth}
                         isComplete={chore.isComplete}
-                        onClick={() => addChore(chore.name)}
+                        onClick={() => addChore(chore)}
+                        // onClick={handleEvent}
                         />
                     ))
                 }

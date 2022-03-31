@@ -27,7 +27,7 @@ const App = () => {
   const [loading, setLoading] = useState(true)
   const [chores, setChores] = useState([])
   const [thisChildList, setThisChildList] = useState([])
-  const [newList, setNewList] = useState({})
+  let [newList, setNewList] = useState({})
   
   const navigate = useNavigate()
   
@@ -76,7 +76,7 @@ const App = () => {
   useEffect( () => {
     getAllUsers()
     getAllChores()
-  }, [])
+  }, [newList])
 
   useEffect( () => {
     getChildren()
