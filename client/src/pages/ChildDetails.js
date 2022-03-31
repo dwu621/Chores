@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, } from "react"
 import { DataContext } from "../components/DataContext"
 import { useParams } from "react-router-dom"
 import ChildCard from "../components/ChildCard"
@@ -52,7 +52,7 @@ const ChildDetails = () => {
            </div>
             )}
             <div className="container-grid">
-                
+
             </div>
         </div>
     )

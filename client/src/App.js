@@ -14,9 +14,10 @@ import ChildDetails from './pages/ChildDetails'
 // import ComponentB from './components/ComponentB';
 // import ComponentC from './components/ComponentC';
 
-const BASE_URL = 'http://localhost:3001/api'
+
 
 const App = () => {
+  const BASE_URL = 'http://localhost:3001/api'
   const [allUsers, setAllUsers] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [currentUser, setCurrentUser] = useState({})
@@ -24,6 +25,7 @@ const App = () => {
   const [children, setChildren] = useState([])
   const [thisChild, setThisChild] = useState({})
   const [loading, setLoading] = useState(true)
+  const [chores, setChores] = useState([])
   
   const navigate = useNavigate()
   
@@ -46,9 +48,9 @@ const App = () => {
   )  
   
   const getAllUsers = async () => {
-    const result = await axios.get(`${BASE_URL}/user`)
-    setAllUsers(result.data.users)
-    console.log('getAllUsers', result.data.users)
+    const res = await axios.get(`${BASE_URL}/user`)
+    setAllUsers(res.data.users)
+    console.log('getAllUsers', res.data.users)
   }
 
   const getChildren = async () => {
@@ -63,8 +65,15 @@ const App = () => {
       console.log(children)
   }
   
+  const getAllChores = async () => {
+    let res = await axios.get(`${BASE_URL}/chore`)
+    console.log('getAllChores',res.data.chores)
+    setChores(res.data.chores)
+  }
+
   useEffect( () => {
     getAllUsers()
+    getAllChores()
   }, [])
 
   useEffect( () => {
@@ -78,6 +87,7 @@ const App = () => {
   return (
     <div className="App">
        <DataContext.Provider value={{ 
+        BASE_URL, 
         userInfo, 
         setUserInfo, 
         chore, 
@@ -93,7 +103,11 @@ const App = () => {
         children, 
         showChild, 
         thisChild, 
-        setThisChild
+        setThisChild,
+        loading,
+        setLoading,
+        chores,
+        setChores
        }}> 
           <Header/>
             <Routes>
