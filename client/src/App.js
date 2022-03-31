@@ -23,6 +23,7 @@ const App = () => {
   const [isParent, setIsParent] = useState(false)
   const [children, setChildren] = useState([])
   const [thisChild, setThisChild] = useState({})
+  const [loading, setLoading] = useState(true)
   
   const navigate = useNavigate()
   
@@ -100,7 +101,7 @@ const App = () => {
               <Route path='about' element={ <About />} />
               <Route path='login' element={ <Login />} />
               <Route path='logout' element={ <Logout />} />
-              <Route path='child/:id' element={ <ChildDetails />} />
+              <Route path='/child/:id' element={ <ChildDetails />} />
 
               
             </Routes>
