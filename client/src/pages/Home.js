@@ -1,14 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { DataContext } from '../components/DataContext'
 import ChildCard from '../components/ChildCard'
+import axios from 'axios'
 
 const Home = () => {
     const { 
+        BASE_URL,
         isLoggedIn, 
         currentUser, 
         children, 
         isParent, 
-        showChild 
+        showChild,
+        setAllUsers,
+        allUsers,
+        setChildren,
+        newList,
+        isChild
     } = useContext(DataContext)
     
     // create child card
@@ -17,6 +24,34 @@ const Home = () => {
     
     console.log('children',children)
 
+    const getAllUsers = async () => {
+        const res = await axios.get(`${BASE_URL}/user`)
+        setAllUsers(res.data.users)
+        console.log('getAllUsers', res.data.users)
+    }
+    
+    const getChildren = async () => {
+        let children = await allUsers.filter((child) => {
+          return child.isChild
+        })
+        if (children) {
+          setChildren(children)
+        } else {
+          console.log('no children found')
+        }
+        console.log(children)
+    }
+
+    useEffect(() => {
+        getAllUsers()
+        // getAllChores()
+        
+      }, [newList])
+
+    useEffect(() => {
+        getChildren()
+    },[allUsers]) 
+    
     return (
         <div>
             {isLoggedIn ? <h1>Welcome back {currentUser.userName}</h1> : <h1>please log in</h1>}
@@ -40,7 +75,7 @@ const Home = () => {
                 </div>
             </div>
             )}
-            {!isParent && (
+            {!isChild && isLoggedIn&& (
                 <div className='isChild'>
                     
                     

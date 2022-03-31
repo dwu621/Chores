@@ -7,6 +7,7 @@ import Header from './components/Header'
 import Home from './pages/Home'
 import About from './pages/About'
 import Login from './pages/Login' 
+import Signup from './pages/Signup'
 import Logout from './pages/Logout'
 import ChildDetails from './pages/ChildDetails'
 
@@ -27,45 +28,28 @@ const App = () => {
   const [loading, setLoading] = useState(true)
   const [chores, setChores] = useState([])
   const [thisChildList, setThisChildList] = useState([])
-  let [newList, setNewList] = useState({})
+  const [newList, setNewList] = useState({})
+  const [isChild, setIsChild] = useState(false)
   
   const navigate = useNavigate()
   
-  const [userInfo, setUserInfo] = useState(
-    {
-        name: 'David',
-        favColor: 'red',
-        favBook: 'Game of Thrones',
-        favFood: 'Xiao Long Bao',
-        choresList: []
-    }
-    )
-  const [chore, setChore] = useState(
-    {
-        name: 'Shovel Snow',
-        description: 'Shovel the snow',
-        pointsEarned: '50',
-        isComeplete: false
-    }
-  )  
-  
-  const getAllUsers = async () => {
-    const res = await axios.get(`${BASE_URL}/user`)
-    setAllUsers(res.data.users)
-    console.log('getAllUsers', res.data.users)
-  }
+  // const getAllUsers = async () => {
+  //   const res = await axios.get(`${BASE_URL}/user`)
+  //   setAllUsers(res.data.users)
+  //   console.log('getAllUsers', res.data.users)
+  // }
 
-  const getChildren = async () => {
-      let children = await allUsers.filter((child) => {
-        return child.isChild
-      })
-      if (children) {
-        setChildren(children)
-      } else {
-        console.log('no children found')
-      }
-      console.log(children)
-  }
+  // const getChildren = async () => {
+  //     let children = await allUsers.filter((child) => {
+  //       return child.isChild
+  //     })
+  //     if (children) {
+  //       setChildren(children)
+  //     } else {
+  //       console.log('no children found')
+  //     }
+  //     console.log(children)
+  // }
   
   const getAllChores = async () => {
     let res = await axios.get(`${BASE_URL}/chore`)
@@ -74,13 +58,13 @@ const App = () => {
   }
 
   useEffect( () => {
-    getAllUsers()
+    // getAllUsers()
     getAllChores()
-  }, [newList])
+  }, [])
 
-  useEffect( () => {
-    getChildren()
-  }, [allUsers])
+  // useEffect( () => {
+  //   getChildren()
+  // }, [allUsers])
   
   const showChild = (childId) => {
     navigate(`/child/${childId}`)
@@ -90,10 +74,6 @@ const App = () => {
     <div className="App">
        <DataContext.Provider value={{ 
         BASE_URL, 
-        userInfo, 
-        setUserInfo, 
-        chore, 
-        setChore, 
         isLoggedIn, 
         setIsLoggedIn, 
         allUsers, 
@@ -113,13 +93,19 @@ const App = () => {
         thisChildList,
         setThisChildList,
         newList,
-        setNewList
+        setNewList,
+        setAllUsers,
+        setChildren,
+        isChild,
+        setIsChild
+
        }}> 
           <Header/>
             <Routes>
               <Route path='/' element={ <Home />} />
               <Route path='about' element={ <About />} />
               <Route path='login' element={ <Login />} />
+              <Route path='signup'  element={<Signup />} />
               <Route path='logout' element={ <Logout />} />
               <Route path='/child/:id' element={ <ChildDetails />} />
 

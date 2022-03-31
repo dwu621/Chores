@@ -10,7 +10,16 @@ import { DataContext } from '../components/DataContext'
 // navigate back home
 
 const Login = () => {
-    const { isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser, setIsParent, allUsers, navigate } = useContext( DataContext )
+    const { 
+        isLoggedIn,
+        setIsLoggedIn, 
+        currentUser, 
+        setCurrentUser, 
+        setIsParent, 
+        allUsers, 
+        navigate,
+        setIsChild 
+    } = useContext( DataContext )
     const [checkUser, setCheckUser] = useState({
         userName: '',
         password: ''
@@ -23,7 +32,9 @@ const Login = () => {
         console.log(currentUser)
     })
 
-    const handleChange = (e, name) => name === 'userInput' ? setCheckUser({...checkUser, userName: e.target.value}) : setCheckUser({...checkUser, password: e.target.value})
+    const handleChange = (e, name) => name === 'userInput' ? 
+    setCheckUser({...checkUser, userName: e.target.value}) : 
+    setCheckUser({...checkUser, password: e.target.value})
 
     const auth = () => {
         let authUser = allUsers.find((user) => {
@@ -32,15 +43,20 @@ const Login = () => {
         if(authUser) {
             setCurrentUser(authUser)
             setIsParent(authUser.isParent)
+            setIsChild(authUser.isChild)
             setIsLoggedIn(true)
             navigate('/')
-        } else {console.log('Invalid username or password')}
+        } else {alert('Invalid username or password')}
        
     }
     
+    const signup = () => {
+        navigate('./signup')
+    }
+
     return (
-        <div>
-            
+        <div className='login'>
+            <form>
                 <label>Username:</label>
                 <input type='text' name='userInput' value={checkUser.userName} onChange={(e) => handleChange(e, e.target.name)} />
                 <br />
@@ -48,7 +64,8 @@ const Login = () => {
                 <input type='password' name='passwordInput' value={checkUser.password} onChange={(e) => handleChange(e, e.target.name)} />
                 <br/>
                 <button onClick={auth}>Login</button>
-            
+                <button onClick={signup}>Signup</button>
+            </form>
             {isLoggedIn && <h1>You've successfully logged in</h1>}
            
         </div>

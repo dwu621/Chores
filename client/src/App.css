@@ -52,3 +52,12 @@
   grid-gap: 1em;
   justify-content: center;
 }
+
+ul {
+  list-style: none;
+  text-align: center;
+}
+li {
+  
+  margin-right:20px;
+}
