@@ -2,6 +2,7 @@ import { useContext, useEffect, } from "react"
 import { DataContext } from "../components/DataContext"
 import { useParams } from "react-router-dom"
 import ChildCard from "../components/ChildCard"
+import ChoreCard from "../components/ChoreCard"
 
 
 const ChildDetails = () => {
@@ -10,7 +11,8 @@ const ChildDetails = () => {
         thisChild, 
         setThisChild, 
         loading, 
-        setLoading 
+        setLoading,
+        chores 
     } =  useContext(DataContext)
     
      //use children array to retrieve with params? and make child card
@@ -20,7 +22,8 @@ const ChildDetails = () => {
     const { id } = useParams()
     
     const getChild = async () => {
-       let child = await children.find((child) => {
+        setLoading(true)
+        let child = await children.find((child) => {
             return child._id === id
         })
         console.log(child)
@@ -38,7 +41,9 @@ const ChildDetails = () => {
     }, [])
     
     console.log(thisChild)
-   
+    const addChore = (choreName) => {
+        console.log(choreName)
+    }
     return (
         <div>
             {(!loading) && (
@@ -52,7 +57,18 @@ const ChildDetails = () => {
            </div>
             )}
             <div className="container-grid">
-
+                {
+                    chores.map((chore) => (
+                        <ChoreCard
+                        key={chore._id}
+                        name={chore.name}
+                        description={chore.description}
+                        pointsWorth={chore.pointsWorth}
+                        isComplete={chore.isComplete}
+                        onClick={() => addChore(chore.name)}
+                        />
+                    ))
+                }
             </div>
         </div>
     )

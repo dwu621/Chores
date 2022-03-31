@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.card {
+  max-width: 300px;
+  max-height: 380px;
+  border-radius: 4px;
+  background-color: #fd6868;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.container-grid {
+  padding: 2em 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 320px);
+  grid-gap: 1em;
+  justify-content: center;
+}

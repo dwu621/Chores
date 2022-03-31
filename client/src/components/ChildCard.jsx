@@ -6,9 +6,7 @@ const ChildCard = (props) => {
     return (
         <div className="card child-card" onClick={props.onClick}>
             <div className="info-wrapper flex-col">
-                <h3>{props.userName}</h3>
-                <p>points: {props.pointsEarned}</p>
-                <h4>Chore List</h4>
+                <h3>{props.userName}'s Chore List</h3>
                 <ul>
                     {props.choresList.map((chore, index) => (
                         <li key={index}>
@@ -16,6 +14,7 @@ const ChildCard = (props) => {
                         </li>
                     ))}
                 </ul>
+                <p>{props.userName} has {props.pointsEarned} points</p>
             </div>
             
         </div>
