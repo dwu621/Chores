@@ -27,6 +27,7 @@ const App = () => {
   const [loading, setLoading] = useState(true)
   const [chores, setChores] = useState([])
   const [thisChildList, setThisChildList] = useState([])
+  const [newList, setNewList] = useState({})
   
   const navigate = useNavigate()
   
@@ -110,7 +111,9 @@ const App = () => {
         chores,
         setChores,
         thisChildList,
-        setThisChildList
+        setThisChildList,
+        newList,
+        setNewList
        }}> 
           <Header/>
             <Routes>

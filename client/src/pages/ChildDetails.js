@@ -3,16 +3,22 @@ import { DataContext } from "../components/DataContext"
 import { useParams } from "react-router-dom"
 import ChildCard from "../components/ChildCard"
 import ChoreCard from "../components/ChoreCard"
+import axios from "axios"
 
 
 const ChildDetails = () => {
     const { 
+        BASE_URL,
         children, 
         thisChild, 
         setThisChild, 
         loading, 
         setLoading,
-        chores 
+        chores,
+        thisChildList,
+        setThisChildList,
+        newList,
+        setNewList 
     } =  useContext(DataContext)
     
      //use children array to retrieve with params? and make child card
@@ -23,26 +29,26 @@ const ChildDetails = () => {
     
     const getChild = async () => {
         setLoading(true)
-        let child = await children.find((child) => {
-            return child._id === id
-        })
-        console.log(child)
-        if (child) {
-            setThisChild(child)
-            console.log('we got it')
-        } else {
-            console.log('no child')
-        }
-       setLoading(false) 
+        let res = await axios.get(`${BASE_URL}/user/${id}`)
+        console.log(res.data.user)
+        setThisChild(res.data.user)
+        setThisChildList(res.data.user.choresList)
+        setLoading(false) 
     }
     
     useEffect(() => {
         getChild()
-    }, [])
+    }, [newList])
     
-    console.log(thisChild)
-    const addChore = (choreName) => {
+    
+    const addChore = async (choreName) => {
+        setNewList({choresList: [...thisChildList, choreName]})
+        if (newList !== thisChildList){
+            await axios.put(`${BASE_URL}/user/${id}`, newList)
+        }
+        console.log(thisChildList)
         console.log(choreName)
+        console.log('new', newList)
     }
     return (
         <div>
