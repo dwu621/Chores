@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import { DataContext } from "./DataContext"
 
 const ChildCard = (props) => {
-    
+    const { isChild } = useContext(DataContext)   
     return (
         <div className="card child-card" onClick={props.onClick}>
             <div className="info-wrapper flex-col">
@@ -10,7 +10,8 @@ const ChildCard = (props) => {
                 <ul>
                     {props.choresList.map((chore, index) => (
                         <li key={index}>
-                            {chore.description} 
+                            {chore.description}
+                            {isChild && (<button onClick={() => props.removeChore(chore._id, index)}>Done</button>)} 
                         </li>
                     ))}
                 </ul>

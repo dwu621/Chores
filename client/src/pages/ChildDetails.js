@@ -18,7 +18,11 @@ const ChildDetails = () => {
         thisChildList,
         setThisChildList,
         newList,
-        setNewList 
+        setNewList,
+        isParent,
+        isChild,
+        setChores
+        
     } =  useContext(DataContext)
     
      //use children array to retrieve with params? and make child card
@@ -27,6 +31,12 @@ const ChildDetails = () => {
   
     const { id } = useParams()
     
+    const getAllChores = async () => {
+        let res = await axios.get(`${BASE_URL}/chore`)
+        console.log('getAllChores',res.data.chores)
+        setChores(res.data.chores)
+      }
+
     const getChild = async () => {
         setLoading(true)
         let res = await axios.get(`${BASE_URL}/user/${id}`)
@@ -39,6 +49,7 @@ const ChildDetails = () => {
     useEffect(() => {
         getChild()
         console.log(filterChores)
+        console.log('parent?',isParent)
     }, [newList])
 
     const filterChores = chores.filter((chore) => {
@@ -57,7 +68,7 @@ const ChildDetails = () => {
     const addChore = async (chore) => {
             await checkChore(chore)
             if (isAdded) {
-                alert('aleeadythere')
+                alert(`${chore.name} is already on ${thisChild.userName}'s Chore list!`)
             } else {
             thisChild.choresList.push(chore)
             await axios.put(`${BASE_URL}/user/${id}`, thisChild)
@@ -65,6 +76,25 @@ const ChildDetails = () => {
             }
         
     }
+
+    //click done button remove from array
+        //update list and axios put
+        // delete from chore list by id  
+
+    const removeChore = async (choreId, index) => {
+        thisChild.choresList.splice(index, 1 )
+        await axios.put(`${BASE_URL}/user/${id}`, thisChild)
+        await axios.put(`${BASE_URL}/chore/${choreId}`, {isComplete: true})
+        getChild()
+    }
+
+    const deleteChore = async (choreId) => {
+        await axios.delete(`${BASE_URL}/chore/${choreId}`)
+        getChild()
+        getAllChores()
+    }
+
+
     return (
         <div>
             {(!loading) && (
@@ -74,24 +104,52 @@ const ChildDetails = () => {
                 userName={thisChild.userName}
                 // pointsEarned={thisChild.pointsEarned}
                 choresList={thisChild.choresList}
+                removeChore={removeChore}
+                
                 />
            </div>
             )}
-            <div className="container-grid">
+            {(isParent) && (
+                <div className="container-grid">
                 {   
-                    filterChores.map((chore) => (
+                    chores.map((chore) => (
                         <ChoreCard
                         key={chore._id}
                         name={chore.name}
                         description={chore.description}
                         // pointsWorth={chore.pointsWorth}
                         isComplete={chore.isComplete}
-                        onClick={() => addChore(chore)}
+                        addChore={() => addChore(chore)}
+                        deleteChore={()=> deleteChore(chore._id)}
+                        // onClick={() => addChore(chore)}
                         // onClick={handleEvent}
                         />
                     ))
                 }
             </div>
+            )}
+
+            {isChild && (
+                <div className="container-grid">
+                {   
+                    thisChildList.map((chore) => (
+                        <ChoreCard
+                        key={chore._id}
+                        name={chore.name}
+                        description={chore.description}
+                        // pointsWorth={chore.pointsWorth}
+                        isComplete={chore.isComplete}
+                        // onClick={() => removeChore(chore, index)}
+                        // onClick={handleEvent}
+                        />
+                    ))
+                }
+            </div>
+            )}
+          
+
+          
+            
         </div>
     )
 }

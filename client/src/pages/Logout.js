@@ -2,10 +2,16 @@ import React, { useContext, useEffect } from 'react';
 import { DataContext } from '../components/DataContext';
 
 const Logout = () => {
-    const { setIsLoggedIn } = useContext( DataContext )
+    const { 
+        setIsLoggedIn,
+        setIsParent,
+        setIsChild
+     } = useContext( DataContext )
     
     useEffect(() => {
         setIsLoggedIn(false)
+        setIsChild(false)
+        setIsParent(false)
     }, [])
     
     return (

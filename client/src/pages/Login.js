@@ -45,7 +45,7 @@ const Login = () => {
             setIsParent(authUser.isParent)
             setIsChild(authUser.isChild)
             setIsLoggedIn(true)
-            navigate('/')
+            authUser.isParent ? navigate('/') : navigate(`child/${authUser._id}`)
         } else {alert('Invalid username or password')}
        
     }

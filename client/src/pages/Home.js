@@ -58,7 +58,7 @@ const Home = () => {
 
     useEffect(() => {
         getChildren()
-    },[]) 
+    },[allUsers]) 
     
     return (
         <div>
@@ -85,6 +85,7 @@ const Home = () => {
             )}
             {!isChild && isLoggedIn&& (
                 <div className='isChild'>
+                    
                     
                     
                 </div>
