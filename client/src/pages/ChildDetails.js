@@ -38,13 +38,31 @@ const ChildDetails = () => {
     
     useEffect(() => {
         getChild()
+        console.log(filterChores)
     }, [newList])
 
-   
+    const filterChores = chores.filter((chore) => {
+        return !chore.isComplete
+    })
+    let isAdded = false   
+    
+    const checkChore = async (chore) => {
+        let choreId = chore._id
+        let addedChore = await thisChild.choresList.find((e) => {
+           return e._id === choreId
+        })
+        addedChore ? isAdded = true : isAdded = false
+        console.log(isAdded)
+    }
     const addChore = async (chore) => {
-        thisChild.choresList.push(chore)
-        await axios.put(`${BASE_URL}/user/${id}`, thisChild)
-        getChild()
+            await checkChore(chore)
+            if (isAdded) {
+                alert('aleeadythere')
+            } else {
+            thisChild.choresList.push(chore)
+            await axios.put(`${BASE_URL}/user/${id}`, thisChild)
+            getChild()
+            }
         
     }
     return (
@@ -54,19 +72,19 @@ const ChildDetails = () => {
                 <ChildCard
                 key={thisChild._id}
                 userName={thisChild.userName}
-                pointsEarned={thisChild.pointsEarned}
+                // pointsEarned={thisChild.pointsEarned}
                 choresList={thisChild.choresList}
                 />
            </div>
             )}
             <div className="container-grid">
-                {
-                    chores.map((chore) => (
+                {   
+                    filterChores.map((chore) => (
                         <ChoreCard
                         key={chore._id}
                         name={chore.name}
                         description={chore.description}
-                        pointsWorth={chore.pointsWorth}
+                        // pointsWorth={chore.pointsWorth}
                         isComplete={chore.isComplete}
                         onClick={() => addChore(chore)}
                         // onClick={handleEvent}

@@ -15,7 +15,9 @@ const Home = () => {
         allUsers,
         setChildren,
         newList,
-        isChild
+        isChild,
+        chores,
+        setChores
     } = useContext(DataContext)
     
     // create child card
@@ -42,15 +44,21 @@ const Home = () => {
         console.log(children)
     }
 
+    const getAllChores = async () => {
+          let res = await axios.get(`${BASE_URL}/chore`)
+          console.log('getAllChores',res.data.chores)
+          setChores(res.data.chores)
+        }
+
     useEffect(() => {
         getAllUsers()
-        // getAllChores()
+        getAllChores()
         
-      }, [newList])
+      }, [])
 
     useEffect(() => {
         getChildren()
-    },[allUsers]) 
+    },[]) 
     
     return (
         <div>
@@ -65,7 +73,7 @@ const Home = () => {
                         <ChildCard
                         key={child._id}
                         userName={child.userName}
-                        pointsEarned={child.pointsEarned}
+                        // pointsEarned={child.pointsEarned}
                         choresList={child.choresList}
                         onClick={() => showChild(child._id)}
                         />

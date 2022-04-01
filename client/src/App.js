@@ -51,16 +51,17 @@ const App = () => {
   //     console.log(children)
   // }
   
-  const getAllChores = async () => {
-    let res = await axios.get(`${BASE_URL}/chore`)
-    console.log('getAllChores',res.data.chores)
-    setChores(res.data.chores)
-  }
+  // const getAllChores = async () => {
+  //   let res = await axios.get(`${BASE_URL}/chore`)
+  //   console.log('getAllChores',res.data.chores)
+  //   setChores(res.data.chores)
+  //   console.log('got chores app.js', chores)
+  // }
 
-  useEffect( () => {
+  // useEffect( () => {
     // getAllUsers()
-    getAllChores()
-  }, [])
+    // getAllChores()
+  // }, [])
 
   // useEffect( () => {
   //   getChildren()
@@ -97,7 +98,7 @@ const App = () => {
         setAllUsers,
         setChildren,
         isChild,
-        setIsChild
+        setIsChild,
 
        }}> 
           <Header/>

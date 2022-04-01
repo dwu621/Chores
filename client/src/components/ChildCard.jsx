@@ -14,7 +14,7 @@ const ChildCard = (props) => {
                         </li>
                     ))}
                 </ul>
-                <p>{props.userName} has {props.pointsEarned} points</p>
+                {/* <p>{props.userName} has {props.pointsEarned} points</p> */}
             </div>
             
         </div>

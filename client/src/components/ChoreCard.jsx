@@ -5,10 +5,10 @@ const ChoreCard = (props) => {
             <div className="info-wrapper flex-col">
                 <h3>{props.name}</h3>
                 <p>{props.description}</p>
-                <p>{props.pointsWorth} points</p>
+                {/* <p>{props.pointsWorth} points</p> */}
                 {props.isComplete ? <p>Completed</p> : <p>Incomplete</p>}
-                
             </div>
+          
         </div>
         
     )

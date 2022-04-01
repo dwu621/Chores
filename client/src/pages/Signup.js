@@ -1,16 +1,12 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useState, useContext, } from "react"
 import { DataContext } from "../components/DataContext"
 import axios from "axios"
-
-
-
 
 const Signup = () => {
     const {
         BASE_URL,
-        allUsers,
-        setAllUsers,
-
+        navigate,
+        
     } = useContext( DataContext )
     
     const [newUser, setNewUser] = useState({
@@ -18,17 +14,6 @@ const Signup = () => {
         password: '',
         isParent: false,
         isChild: false
-    })
-
-    // const getAllUsers = async () => {
-    //     const res = await axios.get(`${BASE_URL}/user`)
-    //     setAllUsers(res.data.users)
-    //     console.log('getAllUsers', res.data.users)
-    // }
-
-    useEffect(() => {
-        // getAllUsers()
-        console.log(newUser)
     })
 
     const handleChange = (e, name) => name === 'userInput' ? 
@@ -42,9 +27,11 @@ const Signup = () => {
     const createNewUser = async () => {
         await axios.post(`${BASE_URL}/user`, newUser)
         console.log('created newUser')
+        navigate('/')
     }
     
     return (
+        
         <div >
             <h1>Create New User</h1>
             <label>Username:</label>

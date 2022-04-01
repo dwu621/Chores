@@ -56,6 +56,7 @@ const Login = () => {
 
     return (
         <div className='login'>
+            <h1>Login</h1>
             <form>
                 <label>Username:</label>
                 <input type='text' name='userInput' value={checkUser.userName} onChange={(e) => handleChange(e, e.target.name)} />

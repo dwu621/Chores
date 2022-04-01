@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { DataContext } from '../components/DataContext';
 
 const Logout = () => {
-    const { isLoggedIn, setIsLoggedIn } = useContext( DataContext )
+    const { setIsLoggedIn } = useContext( DataContext )
     
     useEffect(() => {
         setIsLoggedIn(false)
