@@ -21,7 +21,7 @@
 
 #### I will begin by setting up database with sample users/chores/rewards to use and test during devlopment. After setting up backend, I will start frontend with React and try to add more features as more components are finished.
 #### Development Progress can be viewed [here](https://trello.com/b/OOjNlr0N/chores)
-#### Final Project can be viewed [here](insert-link-here)
+#### Final Project can be viewed [here](https://pumpkin-crisp-40969.herokuapp.com/ )
 ***
 
 <!-- ### ***ScreenShots*** -->
