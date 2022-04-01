@@ -7,6 +7,7 @@ import { DataContext } from '../components/DataContext'
 // set loggedin to true
 // set current user to username
 // set isParent to user.isParent
+// set isChild to user.isChild
 // navigate back home
 
 const Login = () => {
@@ -18,7 +19,8 @@ const Login = () => {
         setIsParent, 
         allUsers, 
         navigate,
-        setIsChild 
+        setIsChild,
+        getAllUsers
     } = useContext( DataContext )
     const [checkUser, setCheckUser] = useState({
         userName: '',
@@ -30,7 +32,8 @@ const Login = () => {
         console.log('Login page', allUsers)
         console.log(checkUser)
         console.log(currentUser)
-    })
+        getAllUsers()
+    }, [])
 
     const handleChange = (e, name) => name === 'userInput' ? 
     setCheckUser({...checkUser, userName: e.target.value}) : 
@@ -46,7 +49,10 @@ const Login = () => {
             setIsChild(authUser.isChild)
             setIsLoggedIn(true)
             authUser.isParent ? navigate('/') : navigate(`child/${authUser._id}`)
-        } else {alert('Invalid username or password')}
+        } else {
+            alert('Invalid username or password')
+            getAllUsers()
+        }
        
     }
     

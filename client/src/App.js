@@ -33,11 +33,11 @@ const App = () => {
   
   const navigate = useNavigate()
   
-  // const getAllUsers = async () => {
-  //   const res = await axios.get(`${BASE_URL}/user`)
-  //   setAllUsers(res.data.users)
-  //   console.log('getAllUsers', res.data.users)
-  // }
+  const getAllUsers = async () => {
+    const res = await axios.get(`${BASE_URL}/user`)
+    setAllUsers(res.data.users)
+    console.log('getAllUsers', res.data.users)
+  }
 
   // const getChildren = async () => {
   //     let children = await allUsers.filter((child) => {
@@ -99,9 +99,11 @@ const App = () => {
         setChildren,
         isChild,
         setIsChild,
+        getAllUsers
 
        }}> 
           <Header/>
+          <main>
             <Routes>
               <Route path='/' element={ <Home />} />
               <Route path='about' element={ <About />} />
@@ -109,9 +111,8 @@ const App = () => {
               <Route path='signup'  element={<Signup />} />
               <Route path='logout' element={ <Logout />} />
               <Route path='/child/:id' element={ <ChildDetails />} />
-
-              
             </Routes>
+          </main>
        </DataContext.Provider>     
     </div>   
   );

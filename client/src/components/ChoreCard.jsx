@@ -14,7 +14,6 @@ const { isParent } = useContext(DataContext)
                 {props.isComplete ? <p>Completed</p> : <p>Incomplete</p>}
                 {isParent && (<button onClick={props.addChore}>Assign</button>)}
                 {isParent && (<button onClick={props.deleteChore}>Delete</button>)}
-                
             </div>
             
           

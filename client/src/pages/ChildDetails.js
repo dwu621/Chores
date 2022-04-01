@@ -48,8 +48,6 @@ const ChildDetails = () => {
     
     useEffect(() => {
         getChild()
-        console.log(filterChores)
-        console.log('parent?',isParent)
     }, [newList])
 
     const filterChores = chores.filter((chore) => {
@@ -126,8 +124,11 @@ const ChildDetails = () => {
                         />
                     ))
                 }
-            </div>
+                </div>
+                
             )}
+
+
 
             {isChild && (
                 <div className="container-grid">

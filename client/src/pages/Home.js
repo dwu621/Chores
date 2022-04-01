@@ -17,7 +17,8 @@ const Home = () => {
         newList,
         isChild,
         chores,
-        setChores
+        setChores,
+        getAllUsers
     } = useContext(DataContext)
     
     // create child card
@@ -26,11 +27,11 @@ const Home = () => {
     
     console.log('children',children)
 
-    const getAllUsers = async () => {
-        const res = await axios.get(`${BASE_URL}/user`)
-        setAllUsers(res.data.users)
-        console.log('getAllUsers', res.data.users)
-    }
+    // const getAllUsers = async () => {
+    //     const res = await axios.get(`${BASE_URL}/user`)
+    //     setAllUsers(res.data.users)
+    //     console.log('getAllUsers', res.data.users)
+    // }
     
     const getChildren = async () => {
         let children = await allUsers.filter((child) => {
