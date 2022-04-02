@@ -11,14 +11,8 @@ import Signup from './pages/Signup'
 import Logout from './pages/Logout'
 import ChildDetails from './pages/ChildDetails'
 
-// import ComponentA from './components/ComponentA';
-// import ComponentB from './components/ComponentB';
-// import ComponentC from './components/ComponentC';
-
-
-
 const App = () => {
-  // const BASE_URL = 'http://localhost:3001/api'
+  const BASE_URL = 'http://localhost:3001/api' || '/api' 
   const [allUsers, setAllUsers] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [currentUser, setCurrentUser] = useState({})
@@ -34,38 +28,29 @@ const App = () => {
   const navigate = useNavigate()
   
   const getAllUsers = async () => {
-    const res = await axios.get(`/api/user`)
+    const res = await axios.get(`${BASE_URL}/user`)
     setAllUsers(res.data.users)
     console.log('getAllUsers', res.data.users)
   }
 
-  // const getChildren = async () => {
-  //     let children = await allUsers.filter((child) => {
-  //       return child.isChild
-  //     })
-  //     if (children) {
-  //       setChildren(children)
-  //     } else {
-  //       console.log('no children found')
-  //     }
-  //     console.log(children)
-  // }
+  const getChildren = async () => {
+      let children = await allUsers.filter((child) => {
+        return child.isChild
+      })
+      if (children) {
+        setChildren(children)
+      } else {
+        console.log('no children found')
+      }
+      console.log(children)
+  }
   
-  // const getAllChores = async () => {
-  //   let res = await axios.get(`${BASE_URL}/chore`)
-  //   console.log('getAllChores',res.data.chores)
-  //   setChores(res.data.chores)
-  //   console.log('got chores app.js', chores)
-  // }
-
-  // useEffect( () => {
-    // getAllUsers()
-    // getAllChores()
-  // }, [])
-
-  // useEffect( () => {
-  //   getChildren()
-  // }, [allUsers])
+  const getAllChores = async () => {
+    let res = await axios.get(`${BASE_URL}/chore`)
+    console.log('getAllChores',res.data.chores)
+    setChores(res.data.chores)
+    console.log('got chores app.js', chores)
+  }
   
   const showChild = (childId) => {
     navigate(`/child/${childId}`)
@@ -74,7 +59,7 @@ const App = () => {
   return (
     <div className="App">
        <DataContext.Provider value={{ 
-        // BASE_URL, 
+        BASE_URL, 
         isLoggedIn, 
         setIsLoggedIn, 
         allUsers, 
@@ -99,7 +84,9 @@ const App = () => {
         setChildren,
         isChild,
         setIsChild,
-        getAllUsers
+        getAllUsers,
+        getChildren,
+        getAllChores
 
        }}> 
           <Header/>

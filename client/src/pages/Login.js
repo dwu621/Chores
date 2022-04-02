@@ -63,7 +63,7 @@ const Login = () => {
     return (
         <div className='login'>
             <h1>Login</h1>
-            <form>
+            <div>
                 <label>Username:</label>
                 <input type='text' name='userInput' value={checkUser.userName} onChange={(e) => handleChange(e, e.target.name)} />
                 <br />
@@ -72,7 +72,7 @@ const Login = () => {
                 <br/>
                 <button onClick={auth}>Login</button>
                 <button onClick={signup}>Signup</button>
-            </form>
+            </div>
             {isLoggedIn && <h1>You've successfully logged in</h1>}
            
         </div>

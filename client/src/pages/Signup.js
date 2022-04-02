@@ -4,7 +4,8 @@ import axios from "axios"
 
 const Signup = () => {
     const {
-        navigate,
+        BASE_URL,
+        navigate
         
     } = useContext( DataContext )
     
@@ -24,7 +25,7 @@ const Signup = () => {
     setNewUser({...newUser, isParent: false, isChild: true})
     
     const createNewUser = async () => {
-        await axios.post(`/api/user`, newUser)
+        await axios.post(`${BASE_URL}/user`, newUser)
         console.log('created newUser')
         navigate('/')
     }
