@@ -1,5 +1,5 @@
 import './App.css'
-import React, { useState, useEffect } from 'react'
+import React, { useState, } from 'react'
 import { DataContext } from './components/DataContext'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -18,7 +18,7 @@ import ChildDetails from './pages/ChildDetails'
 
 
 const App = () => {
-  const BASE_URL = 'http://localhost:3001/api'
+  // const BASE_URL = 'http://localhost:3001/api'
   const [allUsers, setAllUsers] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [currentUser, setCurrentUser] = useState({})
@@ -34,7 +34,7 @@ const App = () => {
   const navigate = useNavigate()
   
   const getAllUsers = async () => {
-    const res = await axios.get(`${BASE_URL}/user`)
+    const res = await axios.get(`/api/user`)
     setAllUsers(res.data.users)
     console.log('getAllUsers', res.data.users)
   }
@@ -74,7 +74,7 @@ const App = () => {
   return (
     <div className="App">
        <DataContext.Provider value={{ 
-        BASE_URL, 
+        // BASE_URL, 
         isLoggedIn, 
         setIsLoggedIn, 
         allUsers, 

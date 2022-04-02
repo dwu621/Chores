@@ -8,8 +8,7 @@ import axios from "axios"
 
 const ChildDetails = () => {
     const { 
-        BASE_URL,
-        children, 
+        // BASE_URL,
         thisChild, 
         setThisChild, 
         loading, 
@@ -17,8 +16,6 @@ const ChildDetails = () => {
         chores,
         thisChildList,
         setThisChildList,
-        newList,
-        setNewList,
         isParent,
         isChild,
         setChores
@@ -32,14 +29,14 @@ const ChildDetails = () => {
     const { id } = useParams()
     
     const getAllChores = async () => {
-        let res = await axios.get(`${BASE_URL}/chore`)
+        let res = await axios.get(`/api/chore`)
         console.log('getAllChores',res.data.chores)
         setChores(res.data.chores)
       }
 
     const getChild = async () => {
         setLoading(true)
-        let res = await axios.get(`${BASE_URL}/user/${id}`)
+        let res = await axios.get(`/api/user/${id}`)
         console.log(res.data.user)
         setThisChild(res.data.user)
         setThisChildList(res.data.user.choresList)
@@ -48,11 +45,11 @@ const ChildDetails = () => {
     
     useEffect(() => {
         getChild()
-    }, [newList])
+    }, [])
 
-    const filterChores = chores.filter((chore) => {
-        return !chore.isComplete
-    })
+    // const filterChores = chores.filter((chore) => {
+    //     return !chore.isComplete
+    // })
     let isAdded = false   
     
     const checkChore = async (chore) => {
@@ -69,7 +66,7 @@ const ChildDetails = () => {
                 alert(`${chore.name} is already on ${thisChild.userName}'s Chore list!`)
             } else {
             thisChild.choresList.push(chore)
-            await axios.put(`${BASE_URL}/user/${id}`, thisChild)
+            await axios.put(`/api/user/${id}`, thisChild)
             getChild()
             }
         
@@ -81,13 +78,13 @@ const ChildDetails = () => {
 
     const removeChore = async (choreId, index) => {
         thisChild.choresList.splice(index, 1 )
-        await axios.put(`${BASE_URL}/user/${id}`, thisChild)
-        await axios.put(`${BASE_URL}/chore/${choreId}`, {isComplete: true})
+        await axios.put(`/api/user/${id}`, thisChild)
+        await axios.put(`/api/chore/${choreId}`, {isComplete: true})
         getChild()
     }
 
     const deleteChore = async (choreId) => {
-        await axios.delete(`${BASE_URL}/chore/${choreId}`)
+        await axios.delete(`/api/chore/${choreId}`)
         getChild()
         getAllChores()
     }

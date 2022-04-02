@@ -5,18 +5,15 @@ import axios from 'axios'
 
 const Home = () => {
     const { 
-        BASE_URL,
+        // BASE_URL,
         isLoggedIn, 
         currentUser, 
         children, 
         isParent, 
         showChild,
-        setAllUsers,
         allUsers,
         setChildren,
-        newList,
         isChild,
-        chores,
         setChores,
         getAllUsers
     } = useContext(DataContext)
@@ -46,7 +43,7 @@ const Home = () => {
     }
 
     const getAllChores = async () => {
-          let res = await axios.get(`${BASE_URL}/chore`)
+          let res = await axios.get(`/api/chore`)
           console.log('getAllChores',res.data.chores)
           setChores(res.data.chores)
         }
@@ -59,7 +56,7 @@ const Home = () => {
 
     useEffect(() => {
         getChildren()
-    },[allUsers]) 
+    },[]) 
     
     return (
         <div>
