@@ -13,7 +13,8 @@ const Home = () => {
         isChild,
         getAllUsers,
         getChildren,
-        getAllChores
+        getAllChores,
+        allUsers
     } = useContext(DataContext)
     
     // create child card
@@ -29,7 +30,7 @@ const Home = () => {
 
     useEffect(() => {
         getChildren()
-    },[]) 
+    },[allUsers]) 
     
     return (
         <div>

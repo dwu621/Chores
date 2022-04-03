@@ -45,6 +45,7 @@ const ChildDetails = () => {
     
     useEffect(() => {
         getChild()
+        getAllChores()
     }, [])
 
     // const filterChores = chores.filter((chore) => {
