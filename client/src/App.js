@@ -10,9 +10,10 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Logout from './pages/Logout'
 import ChildDetails from './pages/ChildDetails'
+import { BASE_URL } from './globals'
 
 const App = () => {
-  const BASE_URL = 'http://localhost:3001/api' || '/api' 
+  // const BASE_URL = 'http://localhost:3001/api' || '/api' 
   const [allUsers, setAllUsers] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [currentUser, setCurrentUser] = useState({})
