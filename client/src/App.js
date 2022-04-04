@@ -46,10 +46,12 @@ const App = () => {
   }
   
   const getAllChores = async () => {
+   
     let res = await axios.get(`${BASE_URL}/chore`)
     console.log('getAllChores',res.data.chores)
     setChores(res.data.chores)
     console.log('got chores app.js', chores)
+ 
   }
   
   const showChild = (childId) => {
